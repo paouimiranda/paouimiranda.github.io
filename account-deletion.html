@@ -333,24 +333,115 @@
         }
         @media (max-width: 768px) {
             .container {
-                padding: 24px 16px;
+                padding: 20px 16px;
             }
             h1 {
-                font-size: 28px;
+                font-size: 26px;
             }
             h2 {
                 font-size: 20px;
             }
+            h3 {
+                font-size: 16px;
+            }
             .glass-card {
-                padding: 24px;
+                padding: 20px;
+                margin-bottom: 20px;
             }
             .icon-badge {
                 width: 80px;
                 height: 80px;
+                margin-bottom: 20px;
             }
             .icon-badge svg {
                 width: 40px;
                 height: 40px;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .section-icon {
+                width: 40px;
+                height: 40px;
+            }
+            .section-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+            .steps-container {
+                padding: 16px;
+            }
+            .step {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 12px;
+                gap: 12px;
+            }
+            .step-number {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            .step-title {
+                font-size: 15px;
+            }
+            .step-description {
+                font-size: 13px;
+            }
+            .warning-box, .info-box {
+                flex-direction: column;
+                padding: 16px;
+                gap: 12px;
+            }
+            .warning-box svg, .info-box svg {
+                width: 20px;
+                height: 20px;
+            }
+            .contact-button {
+                width: 100%;
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+            .contact-button svg {
+                width: 18px;
+                height: 18px;
+            }
+            p {
+                font-size: 14px;
+            }
+            li {
+                font-size: 14px;
+            }
+            .header {
+                margin-bottom: 40px;
+            }
+            .subtitle {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px 12px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            h2 {
+                font-size: 18px;
+            }
+            .glass-card {
+                padding: 16px;
+            }
+            .icon-badge {
+                width: 70px;
+                height: 70px;
+            }
+            .icon-badge svg {
+                width: 35px;
+                height: 35px;
             }
         }
         .glass-card:nth-child(1) { animation-delay: 100ms; }
@@ -447,7 +538,7 @@
                 </div>
             </div>
 
-            <a href="mailto:rubric.capstone@gmail.com?subject=Account%20Deletion%20Request" class="contact-button">
+            <a href="mailto:rubric.capstone@gmail.com?subject=Account%20Deletion%20Request&body=Hello%20Rubric%20Team%2C%0D%0A%0D%0AI%20am%20requesting%20the%20deletion%20of%20my%20Rubric%20account.%0D%0A%0D%0AAccount%20Details%3A%0D%0A-%20Registered%20Email%3A%20%5BYour%20email%20here%5D%0D%0A-%20Username%3A%20%5BYour%20username%20here%5D%0D%0A%0D%0AI%20understand%20that%3A%0D%0A-%20This%20action%20is%20permanent%20and%20cannot%20be%20undone%0D%0A-%20All%20my%20data%20will%20be%20deleted%20within%2030%20days%0D%0A-%20I%20may%20be%20asked%20to%20verify%20my%20identity%0D%0A%0D%0APlease%20proceed%20with%20the%20account%20deletion.%0D%0A%0D%0AThank%20you%2C%0D%0A%5BYour%20name%5D" class="contact-button">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
