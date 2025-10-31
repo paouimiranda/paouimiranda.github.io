@@ -286,6 +286,78 @@
             color: #d4dce8;
             margin: 0;
         }
+        .form-container {
+            margin: 24px 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .form-group {
+            margin-bottom: 24px;
+        }
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: 0.3px;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 300ms ease;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        input[type="text"]:hover,
+        input[type="email"]:hover,
+        textarea:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: rgba(79, 172, 254, 0.6);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.15), 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-1px);
+        }
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            line-height: 1.6;
+        }
+        .error-message {
+            display: block;
+            color: #f5576c;
+            font-size: 13px;
+            font-weight: 500;
+            margin-top: 8px;
+            min-height: 20px;
+            padding-left: 4px;
+        }
         .contact-button {
             display: inline-flex;
             align-items: center;
@@ -297,7 +369,8 @@
             border-radius: 16px;
             font-size: 16px;
             font-weight: 700;
-            text-decoration: none;
+            border: none;
+            cursor: pointer;
             box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
             transition: all 300ms ease;
             margin-top: 20px;
@@ -306,6 +379,9 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(245, 87, 108, 0.6);
             opacity: 0.9;
+        }
+        .contact-button:active {
+            transform: translateY(0);
         }
         .contact-button svg {
             width: 20px;
@@ -538,12 +614,31 @@
                 </div>
             </div>
 
-            <a href="mailto:rubric.capstone@gmail.com?subject=Account%20Deletion%20Request&body=Hello%20Rubric%20Team%2C%0D%0A%0D%0AI%20am%20requesting%20the%20deletion%20of%20my%20Rubric%20account.%0D%0A%0D%0AAccount%20Details%3A%0D%0A-%20Registered%20Email%3A%20%5BYour%20email%20here%5D%0D%0A-%20Username%3A%20%5BYour%20username%20here%5D%0D%0A%0D%0AI%20understand%20that%3A%0D%0A-%20This%20action%20is%20permanent%20and%20cannot%20be%20undone%0D%0A-%20All%20my%20data%20will%20be%20deleted%20within%2030%20days%0D%0A-%20I%20may%20be%20asked%20to%20verify%20my%20identity%0D%0A%0D%0APlease%20proceed%20with%20the%20account%20deletion.%0D%0A%0D%0AThank%20you%2C%0D%0A%5BYour%20name%5D" class="contact-button">
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="username">Username *</label>
+                    <input type="text" id="username" placeholder="Enter your Rubric username" required>
+                    <span class="error-message" id="username-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Registered Email Address *</label>
+                    <input type="email" id="email" placeholder="Enter your registered email" required>
+                    <span class="error-message" id="email-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">Reason for Deletion (Optional)</label>
+                    <textarea id="reason" rows="4" placeholder="Please let us know why you're leaving (optional but helpful for us to improve)"></textarea>
+                </div>
+            </div>
+
+            <button onclick="sendDeletionRequest()" class="contact-button">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
                 Send Deletion Request
-            </a>
+            </button>
         </div>
 
         <div class="glass-card">
@@ -631,6 +726,79 @@
         </div>
     </div>
     <script>
+        function sendDeletionRequest() {
+            // Get form values
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const reason = document.getElementById('reason').value.trim();
+            
+            // Clear previous errors
+            document.getElementById('username-error').textContent = '';
+            document.getElementById('email-error').textContent = '';
+            
+            // Validation
+            let isValid = true;
+            
+            if (!username) {
+                document.getElementById('username-error').textContent = 'Username is required';
+                isValid = false;
+            }
+            
+            if (!email) {
+                document.getElementById('email-error').textContent = 'Email address is required';
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                document.getElementById('email-error').textContent = 'Please enter a valid email address';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // Build email body
+            let emailBody = `Hello Rubric Team,
+
+I am requesting the deletion of my Rubric account.
+
+Account Details:
+- Registered Email: ${email}
+- Username: ${username}`;
+            
+            if (reason) {
+                emailBody += `
+
+Reason for Deletion:
+${reason}`;
+            }
+            
+            emailBody += `
+
+I understand that:
+- This action is permanent and cannot be undone
+- All my data will be deleted within 30 days
+- I may be asked to verify my identity
+
+Please proceed with the account deletion.
+
+Thank you`;
+            
+            // Encode the email body for URL
+            const encodedBody = encodeURIComponent(emailBody);
+            const encodedSubject = encodeURIComponent('Account Deletion Request');
+            
+            // Create mailto link
+            const mailtoLink = `mailto:rubric.capstone@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+        }
+        
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
         // Scroll-triggered animations
         const observerOptions = {
             threshold: 0.1,
